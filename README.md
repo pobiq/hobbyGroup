@@ -131,7 +131,7 @@
  
 
 ## ERD
-
+![hobby](https://github.com/pobiq/hobbyGroup/assets/111417407/e94d8bd7-0cab-4bce-b94d-1725e7516a5b)
 
 
 ## 추가 기능 구현 예정 (우선순위가 낮은 것)
