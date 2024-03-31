@@ -1,6 +1,5 @@
 package com.zerobase.hobbyGroup.service;
 
-import com.zerobase.hobbyGroup.config.GoogleEmailConfig;
 import com.zerobase.hobbyGroup.dto.Email;
 import com.zerobase.hobbyGroup.entity.UserEntity;
 import com.zerobase.hobbyGroup.exception.impl.auth.NotEqualAuthCodeException;
@@ -8,7 +7,6 @@ import com.zerobase.hobbyGroup.exception.impl.email.AlreadyEmailAuthException;
 import com.zerobase.hobbyGroup.exception.impl.email.AlreadySendEmailException;
 import com.zerobase.hobbyGroup.exception.impl.email.NoEmailException;
 import com.zerobase.hobbyGroup.exception.impl.email.NotEmailFormException;
-import com.zerobase.hobbyGroup.exception.impl.email.UnableToSendEmailException;
 import com.zerobase.hobbyGroup.exception.impl.other.LogicException;
 import com.zerobase.hobbyGroup.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -23,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 @Slf4j
