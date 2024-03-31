@@ -58,7 +58,7 @@ public class UserService implements UserDetailsService {
       throw new NotEqualPasswordException();
     }
 
-    //      - 일치하는 경우, 해당 멤버 엔티티 반환
+    // 일치하는 경우, 해당 멤버 엔티티 반환
     return userentity;
   }
 
