@@ -79,6 +79,7 @@ class UserControllerTest {
         .phone("010-1234-1234")
         .roadAddress("테스트도로명주소")
         .jibunAddress("테스트지번주소")
+        .role("user")
         .build();
 
     SignUpReponse signUpResponse = SignUpReponse.builder()

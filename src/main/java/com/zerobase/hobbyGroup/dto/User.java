@@ -68,6 +68,9 @@ public class User {
     @Size(max = 100, message = "지번 주소는 최대 100자 까지 입니다.")
     private String jibunAddress;
 
+    @NotBlank(message = "역할은 필수 입력 값입니다.")
+    private String role;
+
     public UserEntity toEntity() {
       return UserEntity.builder()
           .email(this.email)
@@ -79,7 +82,6 @@ public class User {
           .jibunAddress(this.jibunAddress)
           .createdAt(LocalDateTime.now())
           .emailAuth(false)
-          .roles(List.of(Roles.USER.getValue()))
           .build();
     }
   }
@@ -116,7 +118,7 @@ public class User {
   public static class UpdateFormRequest {
 
     @NotNull(message = "유저 아이디는 필수 입력 값입니다.")
-    @Min(value = 0, message = "유저 아이디는 0이상이어야 합니다.")
+    @Min(value = 1, message = "유저 아이디는 1이상이어야 합니다.")
     @Max(value = 2147483647, message = "유저 아이디는 2147483647 이하여야 합니다.")
     private Long userId;
 
@@ -174,7 +176,7 @@ public class User {
   public static class deleteRequest {
 
     @NotNull(message = "유저 아이디는 필수 입력 값입니다.")
-    @Min(value = 0, message = "유저 아이디는 0이상이어야 합니다.")
+    @Min(value = 1, message = "유저 아이디는 1이상이어야 합니다.")
     @Max(value = 2147483647, message = "유저 아이디는 2147483647 이하여야 합니다.")
     private Long userId;
 

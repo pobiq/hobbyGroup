@@ -8,9 +8,12 @@ import com.zerobase.hobbyGroup.exception.impl.auth.NotEqualPasswordException;
 import com.zerobase.hobbyGroup.exception.impl.email.AlreadyExistUserException;
 import com.zerobase.hobbyGroup.exception.impl.email.NoEmailException;
 import com.zerobase.hobbyGroup.exception.impl.email.NotEmailAuthorization;
+import com.zerobase.hobbyGroup.exception.impl.role.NoRoleException;
 import com.zerobase.hobbyGroup.exception.impl.user.NoUserException;
 import com.zerobase.hobbyGroup.repository.UserRepository;
+import com.zerobase.hobbyGroup.type.Roles;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -48,7 +51,21 @@ public class UserService implements UserDetailsService {
     // ID 생성 가능한 경우, 멤버 테이블에 저장
     // 비밀번호는 암호화 되어서 저장되어야함
     user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-    var result = this.userRepository.save(user.toEntity());
+    UserEntity userEntity = user.toEntity();
+
+    String role = user.getRole();
+
+    if(!(role.equals("user") || role.equals("admin"))) {
+      throw new NoRoleException();
+    }
+
+    if(role.equals("user")) {
+      userEntity.setRoles(List.of(Roles.USER.getValue()));
+    } else if(role.equals("admin")) {
+      userEntity.setRoles(List.of(Roles.ADMIN.getValue()));
+    }
+
+    var result = this.userRepository.save(userEntity);
     log.info("user create finished");
     return User.SignUpReponse.fromEntity(result);
   }
