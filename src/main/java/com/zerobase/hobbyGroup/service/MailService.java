@@ -6,10 +6,10 @@ import com.zerobase.hobbyGroup.exception.impl.auth.NotEqualAuthCodeException;
 import com.zerobase.hobbyGroup.exception.impl.email.AlreadyEmailAuthException;
 import com.zerobase.hobbyGroup.exception.impl.email.AlreadySendEmailException;
 import com.zerobase.hobbyGroup.exception.impl.email.NoEmailException;
-import com.zerobase.hobbyGroup.exception.impl.email.NotEmailFormException;
 import com.zerobase.hobbyGroup.exception.impl.other.LogicException;
 import com.zerobase.hobbyGroup.repository.UserRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.Duration;
@@ -37,31 +37,15 @@ public class MailService {
 
   private final long authCodeExpirationMillis = 300000; // 5분
 
-  public void sendCodeToEmail(Email.SendRequest request) {
+  public void sendCodeToEmail(@Valid Email.SendRequest request) {
     String toEmail = request.getEmail();
-
-    //vaildation
-    //정상적인 이메일 형식 인지 검증
-    String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
-
-    Pattern pattern = Pattern.compile(regex);
-    Matcher matcher = pattern.matcher(toEmail);
-
-    if(!matcher.matches()) {
-      throw new NotEmailFormException();
-    }
-    this.check(toEmail);
-
-    // 이미 인증 메일을 보냈는지 확인
-    if(redisService.existsKey(toEmail)) {
-      throw new AlreadySendEmailException();
-    }
 
     String title = "이메일 인증";
     String authCode = this.createCode();
+    String key = toEmail + "AuthCode";
     this.sendEmail(toEmail, title, "인증번호 : " + authCode);
-    // 이메일 인증 요청 시 인증 번호 Redis에 저장 ( key = "Email / value = 6자리 숫자 )
-    redisService.setValues(toEmail, authCode, Duration.ofMillis(this.authCodeExpirationMillis));
+    // 이메일 인증 요청 시 인증 번호 Redis에 저장 ( key = "EmailAuthCode / value = 6자리 숫자 )
+    this.redisService.setValues(key, authCode, Duration.ofMillis(this.authCodeExpirationMillis));
   }
 
   /**
@@ -69,7 +53,7 @@ public class MailService {
    * @param email 보낼 이메일 주소
    */
   private void check(String email) {
-    Optional<UserEntity> userEntity = userRepository.findByEmail(email);
+    Optional<UserEntity> userEntity = this.userRepository.findByEmail(email);
     // 회원 가입된 이메일인지 확인
     if(userEntity.isEmpty()) {
       throw new NoEmailException();
@@ -104,7 +88,7 @@ public class MailService {
   public void sendEmail(String toEmail, String title, String text) {
     SimpleMailMessage emailForm = createEmailForm(toEmail, title, text);
     try {
-      javaMailSender.send(emailForm);
+      this.javaMailSender.send(emailForm);
     } catch (RuntimeException e) {
       throw e;
     }
@@ -118,14 +102,15 @@ public class MailService {
    */
   public Email.VerificationReponse verifiedCode(String email, String authCode) {
     this.check(email);
-    String redisAuthCode = redisService.getValues(email);
-    boolean authResult = redisService.checkExistsValue(redisAuthCode) && redisAuthCode.equals(authCode);
+    String key = email + "AuthCode";
+    String redisAuthCode = this.redisService.getValues(key);
+    boolean authResult = this.redisService.checkExistsValue(redisAuthCode) && redisAuthCode.equals(authCode);
 
-    Optional<UserEntity> optionalUserEntity = userRepository.findByEmail(email);
+    Optional<UserEntity> optionalUserEntity = this.userRepository.findByEmail(email);
     UserEntity userEntity = optionalUserEntity.get();
     if(authResult) {
       userEntity.setEmailAuth(true);
-      userRepository.save(userEntity);
+      this.userRepository.save(userEntity);
     } else {
       throw new NotEqualAuthCodeException();
     }

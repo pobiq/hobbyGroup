@@ -2,6 +2,7 @@ package com.zerobase.hobbyGroup.controller;
 
 import com.zerobase.hobbyGroup.dto.Email;
 import com.zerobase.hobbyGroup.service.MailService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +19,27 @@ public class EmailController {
 
   private final MailService mailService;
 
+  /**
+   * 인증코드 이메일 전송
+   * @param request 이메일 dto
+   * @return
+   */
   @PostMapping("/send")
-  public ResponseEntity<?> sendMessage(@RequestBody Email.SendRequest request) {
+  public ResponseEntity<?> sendMessage(@RequestBody @Valid Email.SendRequest request) {
     mailService.sendCodeToEmail(request);
 
-    return ResponseEntity.ok(request);
+    return ResponseEntity.ok("인증코드를 보냈습니다." + request.getEmail() + "을 확인해주세요.");
   }
 
+  /**
+   * 인증
+   * @param request 이메일, 인증코드 dto
+   * @return
+   */
   @PostMapping("/verification")
-  public ResponseEntity<?> verificationEmail(@RequestBody Email.VerificationRequest request) {
+  public ResponseEntity<?> verificationEmail(@RequestBody @Valid Email.VerificationRequest request) {
     Email.VerificationReponse response = mailService.verifiedCode(request.getEmail(), request.getCode());
-
-    return ResponseEntity.ok(response);
+    return ResponseEntity.ok("인증이 완료되었습니다.");
   }
 
 }
