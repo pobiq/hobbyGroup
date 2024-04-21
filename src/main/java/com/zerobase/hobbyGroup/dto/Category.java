@@ -44,7 +44,7 @@ public class Category {
   @Builder
   public static class UpdateRequest {
 
-    @NotNull(message = "카테고리 아이디는 필수 입력 값 입니다.")
+    @NotNull(message = "카테고리 아이디는 필수 입력 값입니다.")
     @Min(value = 1, message = "카테고리 아이디는 1이상이어야 합니다.")
     @Max(value = 2147483647, message = "카테고리 아이디는 2147483647 이하여야 합니다.")
     private Long categoryId;
@@ -72,8 +72,7 @@ public class Category {
   @AllArgsConstructor
   @Builder
   public static class DeleteRequest {
-
-    @NotNull(message = "카테고리 아이디는 필수 입력 값 입니다.")
+    @NotNull(message = "카테고리 아이디는 필수 입력 값입니다.")
     @Min(value = 1, message = "카테고리 아이디는 1이상이어야 합니다.")
     @Max(value = 2147483647, message = "카테고리 아이디는 2147483647 이하여야 합니다.")
     private Long categoryId;
@@ -87,7 +86,6 @@ public class Category {
   @AllArgsConstructor
   @Builder
   public static class DeleteReponse {
-
     private String categoryName;
   }
 
@@ -98,6 +96,8 @@ public class Category {
   @AllArgsConstructor
   @Builder
   public static class GetListReponse {
+    private Long categoryId;
+
     private String categoryName;
   }
 

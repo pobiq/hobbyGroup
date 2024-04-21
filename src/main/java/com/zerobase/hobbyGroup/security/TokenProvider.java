@@ -103,7 +103,7 @@ public class TokenProvider {
    * @param token 토큰
    * @return Claims 객체
    */
-  private Claims parseClaims(String token) {
+  public Claims parseClaims(String token) {
     try {
       return Jwts.parser().setSigningKey(this.secretKey).parseClaimsJws(token).getBody();
     } catch (ExpiredJwtException e) {

@@ -96,9 +96,11 @@ public class UserController {
    */
   @PostMapping("/logout")
   public ResponseEntity<?> logout(@RequestHeader("Authorization") String token) {
-    ResponseEntity<?> responseEntity = this.tokenProvider.validToken(token);
-    if (responseEntity != null) {
-      return responseEntity; // 유효하지 않은 토큰 또는 이미 로그아웃된 토큰일 경우 해당 응답을 그대로 반환
+
+    // validation
+    ResponseEntity<?> tokenResponse = this.tokenProvider.validToken(token);
+    if (tokenResponse != null) {
+      return tokenResponse; // 유효하지 않은 토큰 또는 이미 로그아웃된 토큰일 경우 해당 응답을 그대로 반환
     }
 
     this.tokenProvider.invalidateToken(token.substring(7));

@@ -16,34 +16,21 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity(name = "group_board")
+@Entity(name = "comment")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GroupBoardEntity {
+public class CommentEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "group_id")
-  private Long groupId;
+  @Column(name = "comment_id")
+  private Long commentId;
 
-  @Column(name = "group_title")
-  private String groupTitle;
-
-  @Column(name = "head_count")
-  private Long headCount;
-
-  @Column(name = "group_content")
-  private String groupContent;
-
-  @Column(name = "start_at")
-  private LocalDateTime startAt;
-
-  @Column(name = "end_at")
-  private LocalDateTime endAt;
+  private String content;
 
   @Column(name = "created_at")
   private LocalDateTime createdAt;
@@ -51,16 +38,9 @@ public class GroupBoardEntity {
   @Column(name = "updated_at")
   private LocalDateTime updatedAt;
 
-  @Column(name ="view_count")
-  private Long viewCount;
-
-  @OneToOne
-  @JoinColumn(name="file_id")
-  private FileEntity fileEntity;
-
-  @OneToOne
-  @JoinColumn(name ="category_id")
-  private CategoryEntity categoryEntity;
+  @ManyToOne
+  @JoinColumn(name ="activity_id")
+  private ActivityBoardEntity activityBoardEntity;
 
   @ManyToOne
   @JoinColumn(name ="user_id")

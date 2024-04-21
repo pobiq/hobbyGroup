@@ -55,6 +55,7 @@ public class User {
     @Size(max = 10, message = "이름은 최대 10자 까지 입니다.")
     private String userName;
 
+    @NotBlank(message = "별명은 필수 입력 값입니다.")
     @Size(max = 20, message = "별명은 최대 20자 까지 입니다.")
     private String nickname;
 
@@ -130,6 +131,7 @@ public class User {
     @Size(max = 10, message = "이름은 최대 10자 까지 입니다.")
     private String userName;
 
+    @NotBlank(message = "별명은 필수 입력 값입니다.")
     @Size(max = 20, message = "별명은 최대 20자 까지 입니다.")
     private String nickname;
 

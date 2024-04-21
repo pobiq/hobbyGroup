@@ -31,9 +31,18 @@ public class SecurityConfiguration {
                     (
                         authorize -> authorize
                             .requestMatchers("/swagger-ui/**", "/api-docs/swagger-config").permitAll()
-                            .requestMatchers("/user/signup", "/user/signin", "/email/**", "/user/auth", "/category/listByCategoryName").permitAll()
+                            .requestMatchers("/user/signup", "/user/signin", "/user/auth").permitAll()
                             .requestMatchers("/user/update", "/user/logout", "user/delete").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                            .requestMatchers("/email/**").permitAll()
+                            .requestMatchers("/category/list").permitAll()
                             .requestMatchers("/category/create", "/category/update", "/category/delete").hasAnyAuthority("ROLE_ADMIN")
+                            .requestMatchers("/groupBoard/latest/list", "/groupBoard/title/list", "/groupBoard/view/list", "/groupBoard/detail").permitAll()
+                            .requestMatchers("/groupBoard/create", "/groupBoard/update").hasAnyAuthority("ROLE_USER")
+                            .requestMatchers("/groupBoard/delete").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                            .requestMatchers("/applyGroup/create", "/applyGroup/list", "/applyGroup/self/list", "/applyGroup/detail", "/applyGroup/update", "/applyGroup/accept", "/applyGroup/reject").hasAnyAuthority("ROLE_USER")
+                            .requestMatchers("/likeGroup/create", "/likeGroup/self/list", "/likeGroup/delete").hasAnyAuthority("ROLE_USER")
+                            .requestMatchers("/activityBoard/create/general", "/activityBoard/create/notice", "/activityBoard/latest/list", "/activityBoard/title/list", "/activityBoard/view/list", "/activityBoard/detail", "/activityBoard/update").hasAnyAuthority("ROLE_USER")
+                            .requestMatchers("/activityBoard/delete").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                     )
                 .addFilterBefore(this.authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
