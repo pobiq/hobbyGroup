@@ -3,7 +3,6 @@ package com.zerobase.hobbyGroup.util;
 
 import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

@@ -2,16 +2,12 @@ package com.zerobase.hobbyGroup.controller;
 
 import com.zerobase.hobbyGroup.dto.User;
 import com.zerobase.hobbyGroup.dto.User.UpdateFormResponse;
-import com.zerobase.hobbyGroup.dto.User.deleteRequest;
 import com.zerobase.hobbyGroup.security.TokenProvider;
 import com.zerobase.hobbyGroup.service.UserService;
 import jakarta.validation.Valid;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;

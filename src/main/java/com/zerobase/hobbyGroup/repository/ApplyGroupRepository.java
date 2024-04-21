@@ -27,6 +27,4 @@ public interface ApplyGroupRepository extends JpaRepository<ApplyGroupEntity, Lo
   Optional<ApplyGroupEntity> findByApplyIdAndStatusIn(Long applyId, List<String> status);
 
   boolean existsByGroupBoardEntityGroupIdAndUserEntityUserIdAndStatus(Long groupId, Long userId, String value);
-
-  boolean existsByGroupBoardEntityGroupIdAndStatus(Long groupId, String value);
 }

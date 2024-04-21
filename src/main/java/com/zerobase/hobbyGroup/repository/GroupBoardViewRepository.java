@@ -1,6 +1,5 @@
 package com.zerobase.hobbyGroup.repository;
 
-import com.zerobase.hobbyGroup.entity.GroupBoardEntity;
 import com.zerobase.hobbyGroup.entity.GroupBoardViewEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

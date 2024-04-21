@@ -1,9 +1,6 @@
 package com.zerobase.hobbyGroup.controller;
 
-import com.zerobase.hobbyGroup.dto.ApplyGroup;
 import com.zerobase.hobbyGroup.dto.LikeGroup;
-import com.zerobase.hobbyGroup.dto.LikeGroup.GetSelfListResponse;
-import com.zerobase.hobbyGroup.entity.LikeGroupEntity;
 import com.zerobase.hobbyGroup.security.TokenProvider;
 import com.zerobase.hobbyGroup.service.LikeGroupService;
 import jakarta.validation.Valid;

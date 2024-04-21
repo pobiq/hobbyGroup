@@ -1,13 +1,10 @@
 package com.zerobase.hobbyGroup.controller;
 
 import com.zerobase.hobbyGroup.dto.ActivityBoard;
-import com.zerobase.hobbyGroup.dto.GroupBoard;
 import com.zerobase.hobbyGroup.security.TokenProvider;
 import com.zerobase.hobbyGroup.service.ActivityBoardService;
-import com.zerobase.hobbyGroup.service.GroupBoardService;
 import com.zerobase.hobbyGroup.util.Util;
 import jakarta.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

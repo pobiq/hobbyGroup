@@ -1,7 +1,6 @@
 package com.zerobase.hobbyGroup.controller;
 
 import com.zerobase.hobbyGroup.dto.GroupBoard;
-import com.zerobase.hobbyGroup.repository.GroupBoardRepository;
 import com.zerobase.hobbyGroup.security.TokenProvider;
 import com.zerobase.hobbyGroup.service.GroupBoardService;
 import com.zerobase.hobbyGroup.util.Util;
@@ -13,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;

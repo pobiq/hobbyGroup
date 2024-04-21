@@ -1,8 +1,6 @@
 package com.zerobase.hobbyGroup.repository;
 
-import com.zerobase.hobbyGroup.entity.ActivityBoardEntity;
 import com.zerobase.hobbyGroup.entity.CommentEntity;
-import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -24,7 +24,6 @@ import com.zerobase.hobbyGroup.exception.impl.apply.NoApplyStatusException;
 import com.zerobase.hobbyGroup.exception.impl.apply.NoGroupLeaderException;
 import com.zerobase.hobbyGroup.exception.impl.apply.NoPeriodException;
 import com.zerobase.hobbyGroup.exception.impl.apply.NoRejectException;
-import com.zerobase.hobbyGroup.exception.impl.category.AlreadyCategoryException;
 import com.zerobase.hobbyGroup.exception.impl.group.NoGroupException;
 import com.zerobase.hobbyGroup.exception.impl.other.NoYourSelfException;
 import com.zerobase.hobbyGroup.exception.impl.user.NoUserException;

@@ -1,16 +1,9 @@
 package com.zerobase.hobbyGroup.dto;
 
-import com.zerobase.hobbyGroup.dto.User.UpdateFormResponse;
-import com.zerobase.hobbyGroup.entity.CategoryEntity;
-import com.zerobase.hobbyGroup.entity.GroupBoardEntity;
-import com.zerobase.hobbyGroup.entity.UserEntity;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -20,7 +13,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 public class GroupBoard {
   @Getter
