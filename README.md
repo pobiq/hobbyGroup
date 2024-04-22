@@ -12,7 +12,6 @@
 - Spring Data Jpa
 - MariaDB
 - swagger
-- SSE (Server-Sent Event)
 - Redis
 - docker
 
