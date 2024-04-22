@@ -11,9 +11,7 @@
 - Spring Security
 - Spring Data Jpa
 - MariaDB
-- Elastic Search
 - swagger
-- SSE (Server-Sent Event)
 - Redis
 - docker
 
@@ -137,10 +135,13 @@
  - [모임 활동 게시물 댓글 및 대댓글 삭제]
     - 자신 및 관리자만이 댓글 및 대댓글 삭제 가능
 
- 
+
+## 구현 못한 기능
+- Elastic Search 연동
+- 대댓글 구현
 
 ## ERD
-![hobby](https://github.com/pobiq/hobbyGroup/assets/111417407/56fff099-f1b0-403e-ad84-8d9d041149ac)
+![hobby](https://github.com/pobiq/hobbyGroup/assets/111417407/cf100673-1f0b-45d6-a87f-01aefc6320c5)
 
 
 ## 추가 기능 구현 예정 (우선순위가 낮은 것)
