@@ -67,7 +67,7 @@ public class CommentController {
    * 댓글 수정
    */
   @PutMapping("/update")
-  public ResponseEntity<?> updateActivityBoard(@Valid Comment.UpdateRequest request, @RequestHeader("Authorization") String token) throws Exception {
+  public ResponseEntity<?> updateActivityBoard(@RequestBody @Valid Comment.UpdateRequest request, @RequestHeader("Authorization") String token) throws Exception {
 
     // validation
     ResponseEntity<?> tokenResponse = this.tokenProvider.validToken(token);

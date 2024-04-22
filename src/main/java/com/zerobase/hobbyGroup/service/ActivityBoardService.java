@@ -30,6 +30,7 @@ import com.zerobase.hobbyGroup.exception.impl.user.NoUserException;
 import com.zerobase.hobbyGroup.repository.ActivityBoardRepository;
 import com.zerobase.hobbyGroup.repository.ActivityBoardViewRepository;
 import com.zerobase.hobbyGroup.repository.ApplyGroupRepository;
+import com.zerobase.hobbyGroup.repository.CommentRepository;
 import com.zerobase.hobbyGroup.repository.FileRepository;
 import com.zerobase.hobbyGroup.repository.GroupBoardRepository;
 import com.zerobase.hobbyGroup.repository.UserRepository;
@@ -67,6 +68,8 @@ public class ActivityBoardService {
   private final ActivityBoardRepository activityBoardRepository;
 
   private final ActivityBoardViewRepository activityBoardViewRepository;
+
+  private final CommentRepository commentRepository;
 
   private final TokenProvider tokenProvider;
 
@@ -234,6 +237,9 @@ public class ActivityBoardService {
         .build();
   }
 
+  /**
+   * 활동 게시물 조회(최신 순)
+   */
   public List<GetListResponse> getLatestList(GetListRequest request, String token) {
 
     // validation
@@ -294,6 +300,9 @@ public class ActivityBoardService {
     return resultList;
   }
 
+  /**
+   * 활동 게시물 조회(가나다 순)
+   */
   public List<GetListResponse> getTitleList(GetListRequest request, String token) {
 
     // validation
@@ -355,6 +364,9 @@ public class ActivityBoardService {
     return resultList;
   }
 
+  /**
+   * 활동 게시물 조회(조회수 순)
+   */
   public List<GetListResponse> getViewList(GetListRequest request, String token) {
 
     // validation
@@ -415,6 +427,9 @@ public class ActivityBoardService {
     return resultList;
   }
 
+  /**
+   * 활동 게시물 개별 조회
+   */
   public GetDetailReponse getDetail(GetDetailRequest request, String token) {
 
     // vaildation
@@ -473,6 +488,9 @@ public class ActivityBoardService {
 
   }
 
+  /**
+   * 활동 게시물 수정
+   */
   public UpdateResponse update(UpdateRequest request, MultipartFile file, String token) throws Exception {
 
     String email = this.tokenProvider.parseClaims(token.substring(7)).getSubject();
@@ -573,6 +591,9 @@ public class ActivityBoardService {
         .build();
   }
 
+  /**
+   * 활동 게시물 삭제
+   */
   public DeleteResponse delete(DeleteRequest request, String token) {
 
     // validation
@@ -615,9 +636,11 @@ public class ActivityBoardService {
 
     }
 
-    this.activityBoardViewRepository.deleteByActivityBoardEntityActivityId(request.getActivityId());
+    this.commentRepository.deleteByActivityBoardEntityActivityId(activity.getActivityId());
 
-    this.activityBoardRepository.deleteById(request.getActivityId());
+    this.activityBoardViewRepository.deleteByActivityBoardEntityActivityId(activity.getActivityId());
+
+    this.activityBoardRepository.deleteById(activity.getActivityId());
 
     this.fileRepository.deleteById(activity.getFileEntity().getFileId());
 

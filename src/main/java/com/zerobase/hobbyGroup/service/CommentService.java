@@ -143,7 +143,7 @@ public class CommentService {
         .orElseThrow(NoUserException::new);
 
     var comment = this.commentRepository.findById(request.getCommentId())
-        .orElseThrow();
+        .orElseThrow(NoCommentException::new);
 
     var activity = this.activityBoardRepository.findById(comment.getActivityBoardEntity().getActivityId())
         .orElseThrow(NoActivityBoardException::new);
@@ -166,8 +166,9 @@ public class CommentService {
 
 
     CommentEntity commentEntity = CommentEntity.builder()
-        .commentId(request.getCommentId())
+        .commentId(comment.getCommentId())
         .content(request.getContent())
+        .createdAt(comment.getCreatedAt())
         .updatedAt(LocalDateTime.now())
         .activityBoardEntity(activity)
         .userEntity(user)

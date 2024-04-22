@@ -43,6 +43,8 @@ public class SecurityConfiguration {
                             .requestMatchers("/likeGroup/create", "/likeGroup/self/list", "/likeGroup/delete").hasAnyAuthority("ROLE_USER")
                             .requestMatchers("/activityBoard/create/general", "/activityBoard/create/notice", "/activityBoard/latest/list", "/activityBoard/title/list", "/activityBoard/view/list", "/activityBoard/detail", "/activityBoard/update").hasAnyAuthority("ROLE_USER")
                             .requestMatchers("/activityBoard/delete").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                            .requestMatchers("/comment/create", "/comment/latest/list", "/comment/update").hasAnyAuthority("ROLE_USER")
+                            .requestMatchers("/comment/delete").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                     )
                 .addFilterBefore(this.authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

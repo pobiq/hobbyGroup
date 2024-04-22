@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
 
   Page<CommentEntity> findByActivityBoardEntityActivityId(Long activityId, PageRequest pageRequest);
+
+  void deleteByActivityBoardEntityActivityId(Long activityId);
 }
